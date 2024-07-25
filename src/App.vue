@@ -53,7 +53,7 @@ newNote.value='';
         <button @click="toggleModal()">+</button>
       </header>
       <div class="cards-container">
-        <div class="card" v-for="note in notes" :key="note.id">
+        <div class="card" v-for="note in notes" :key="note.id"       :style="{ backgroundColor: note.background }">
           <p class="main-text">
             
               {{ note.text }}
