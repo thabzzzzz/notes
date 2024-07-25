@@ -13,20 +13,22 @@ modalOn.value=false;
 const newNote = ref('');
 const notes = ref([]);
 
+const getRandomColor =()=> {
+    return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+  
+}
+
 const addNote = ()=>{
 notes.value.push(
   {
     id:Math.floor(Math.random()*100000),
     text:newNote.value,
     date:new Date(),
-    background: function getRandomColor() {
-    return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
-  
-}
+    background: getRandomColor()
   }
 );
 modalOn.value=false;
-console.log('clicked')
+newNote.value='';
 }
 
 </script>
@@ -43,19 +45,17 @@ console.log('clicked')
     <div class="container">
       <header>
         <h1>Notes</h1>
-        {{ notes }}
         <button @click="toggleModal()">+</button>
       </header>
-      <p>{{ notes.values.text}}</p>
       <div class="cards-container">
-        <div class="card">
-          <p class="main-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quasi corporis amet perspiciatis, libero est!</p>
+        <div class="card" v-for="note in notes" :key="note.id">
+          <p class="main-text">
+            
+              {{ note.text }}
+          </p>
           <p class="date">04/27/6853</p>
         </div>
-        <div class="card">
-          <p class="main-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quasi corporis amet perspiciatis, libero est!</p>
-          <p class="date">04/27/6853</p>
-        </div>
+        
       </div>
     </div>
   </main>
