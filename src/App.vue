@@ -3,12 +3,28 @@ import { ref } from 'vue';
 const modalOn = ref(false);
 
 const toggleModal = ()=>{
-  console.log('test');
   modalOn.value=ref(true);
 }
 
 const hideModal=()=>{
 modalOn.value=false;
+}
+
+const newNote = ref('');
+const notes = ref([]);
+
+const addNote = ()=>{
+notes.value.push(
+  {
+    id:Math.floor(Math.random()*100000),
+    text:newNote.value,
+    date:new Date(),
+    background: function getRandomColor() {
+    return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+  
+}
+  }
+)
 }
 
 </script>
@@ -17,16 +33,18 @@ modalOn.value=false;
   <main>
      <div v-if="modalOn" class="overlay">
       <div class="modal">
-        <textarea name="note" id="note" cols="30" rows="10"></textarea>
-        <button >Add Note</button>
+        <textarea name="note" id="note" cols="30" rows="10" v-model="newNote"></textarea>
+        <button @click="addNote">Add Note</button>
         <button class="close" @click="hideModal()">Close</button>
       </div>
      </div> 
     <div class="container">
       <header>
         <h1>Notes</h1>
+        {{ notes }}
         <button @click="toggleModal()">+</button>
       </header>
+      <p>{{ notes.values.text}}</p>
       <div class="cards-container">
         <div class="card">
           <p class="main-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quasi corporis amet perspiciatis, libero est!</p>
