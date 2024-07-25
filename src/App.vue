@@ -18,12 +18,17 @@ const getRandomColor =()=> {
   
 }
 
+const options = { day: 'numeric', month: 'long', year: 'numeric' };
+
+const currentDate = new Date();
+const formattedDate = currentDate.toLocaleDateString('en-GB', options);
+
 const addNote = ()=>{
 notes.value.push(
   {
     id:Math.floor(Math.random()*100000),
     text:newNote.value,
-    date:new Date(),
+    date: formattedDate,
     background: getRandomColor()
   }
 );
@@ -53,7 +58,7 @@ newNote.value='';
             
               {{ note.text }}
           </p>
-          <p class="date">04/27/6853</p>
+          <p class="date">{{note.date}}</p>
         </div>
         
       </div>
