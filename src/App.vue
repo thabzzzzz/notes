@@ -24,7 +24,9 @@ notes.value.push(
   
 }
   }
-)
+);
+modalOn.value=false;
+console.log('clicked')
 }
 
 </script>
