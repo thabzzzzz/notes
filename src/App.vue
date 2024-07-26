@@ -24,7 +24,10 @@ const currentDate = new Date();
 const formattedDate = currentDate.toLocaleDateString('en-GB', options);
 
 const addNote = ()=>{
-notes.value.push(
+
+//valitaditon checks before main functionality
+if(newNote.value.trim().length>4){
+  notes.value.push(
   {
     id:Math.floor(Math.random()*100000),
     text:newNote.value,
@@ -34,6 +37,14 @@ notes.value.push(
 );
 modalOn.value=false;
 newNote.value='';
+
+}
+else{
+  alert('Note needs to be longer than 4 characters')
+}
+
+
+
 }
 
 </script>
@@ -42,7 +53,7 @@ newNote.value='';
   <main>
      <div v-if="modalOn" class="overlay">
       <div class="modal">
-        <textarea name="note" id="note" cols="30" rows="10" v-model="newNote"></textarea>
+        <textarea name="note" id="note" cols="30" rows="10" v-model="newNote" required></textarea>
         <button @click="addNote">Add Note</button>
         <button class="close" @click="hideModal()">Close</button>
       </div>
