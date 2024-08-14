@@ -55,7 +55,8 @@ else{
 
 <template>
   <main>
-     <div v-if="modalOn" class="overlay">
+  <transition-group name="pop" appear>
+    <div v-if="modalOn" class="overlay">
       <div class="modal">
         <textarea name="note" id="note" cols="30" rows="10" v-model.trim="newNote" required></textarea>
         <p style="color: red;" v-if="charError">Minimum characters is 5</p>
@@ -63,6 +64,8 @@ else{
         <button class="close" @click="hideModal()">Close</button>
       </div>
      </div> 
+  </transition-group>
+    
     <div class="container">
       <header>
         <h1>Notes</h1>
@@ -177,4 +180,21 @@ else{
     background-color: rgb(193, 15, 15);
     margin-top: 7px;
   }
+
+  .pop-enter-active,
+.pop-leave-active {
+  transition: transform 0.2s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.2s linear;
+}
+
+.pop-enter,
+.pop-leave-to {
+  opacity: 0;
+  transform: scale(0.3) translateY(-50%) translateX(80%);
+}
+
+.pop-enter-to,
+.pop-leave {
+  opacity: 1;
+  transform: scale(1) translateY(0) translateX(0);
+}
 </style>
